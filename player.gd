@@ -7,6 +7,12 @@ extends Area2D
 func _process(delta):
 	var input = Input.get_vector("left","right","up","down")
 	
+	animation_handler(input)
+		
+	position += input.normalized() * speed * delta
+	position = position.clamp(Vector2(8, 8), screensize - Vector2(8, 8))
+
+func animation_handler(input):
 	if input.x > 0:
 		$Ship.frame = 2
 		$Ship/Boosters.animation  = "right"
@@ -16,6 +22,3 @@ func _process(delta):
 	else:
 		$Ship.frame = 1
 		$Ship/Boosters.animation = "forward"
-		
-	position += input.normalized() * speed * delta
-	position = position.clamp(Vector2(8, 8), screensize - Vector2(8, 8))
