@@ -12,8 +12,9 @@ func spawn_enemies():
 			var e = enemy.instantiate()
 			var pos = Vector2(x * (16 + 8) + 24, 16 * 4 + y * 16)
 			add_child(e)
-			e.start(pos)			
+			e.start(pos)
 			e.died.connect(_on_enemy_died)
 
 func _on_enemy_died(value):
 	score += value
+	$CanvasLayer/UI.update_score(score)
